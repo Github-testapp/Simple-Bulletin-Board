@@ -1,0 +1,156 @@
+以下は、アプリの構成、フォルダ構成、使用しているプログラミング言語やフレームワークを詳細に説明したREADMEファイルの内容です。
+
+```markdown
+# 掲示板アプリケーション
+
+## 概要
+
+このアプリケーションは、カテゴリーごとにスレッドを作成し、そのスレッドにコメントを追加できる掲示板システムです。スレッドには作成日時が表示され、コメントには番号、日時、名前（デフォルトは「匿名」）が表示されます。
+
+## 使用技術
+
+- **プログラミング言語**: JavaScript
+- **フレームワーク**:
+  - **フロントエンド**: jQuery, Bootstrap
+  - **バックエンド**: Express.js
+  - **テンプレートエンジン**: EJS
+- **データベース**: MongoDB
+- **その他**:
+  - Node.js
+  - Mongoose (MongoDB ODM)
+
+## フォルダ構成
+
+```
+my-project
+│
+├── models
+│   ├── category.js         # カテゴリーモデル
+│   ├── comment.js          # コメントモデル
+│   └── thread.js           # スレッドモデル
+│
+├── public
+│   ├── css
+│   │   └── styles.css      # スタイルシート
+│   └── js
+│       └── thread.js       # スレッド詳細のクライアントスクリプト
+│
+├── routes
+│   └── api.js              # APIルート定義
+│
+├── views
+│   ├── index.ejs           # ホームページのテンプレート
+│   └── thread.ejs          # スレッド詳細ページのテンプレート
+│
+├── .gitignore              # Git無視ファイル
+├── package.json            # npmパッケージ設定ファイル
+├── server.js               # アプリケーションエントリーポイント
+└── README.md               # このREADMEファイル
+```
+
+## インストール
+
+1. リポジトリをクローンします。
+   ```bash
+   git clone https://github.com/your-repo/my-project.git
+   ```
+
+2. ディレクトリに移動します。
+   ```bash
+   cd my-project
+   ```
+
+3. 依存関係をインストールします。
+   ```bash
+   npm install
+   ```
+
+4. MongoDBをローカルで起動します。
+
+## 実行
+
+1. アプリケーションを起動します。
+   ```bash
+   npm start
+   ```
+
+2. ブラウザで以下のURLにアクセスします。
+   ```
+   http://localhost:3000
+   ```
+
+## APIエンドポイント
+
+### カテゴリー
+
+- `GET /api/categories` : カテゴリー一覧を取得
+- `GET /api/categories/:id/threads` : 指定したカテゴリーのスレッド一覧を取得
+
+### スレッド
+
+- `GET /api/threads/:id` : 指定したスレッドの詳細を取得
+- `POST /api/threads` : 新しいスレッドを作成
+
+### コメント
+
+- `POST /api/threads/:id/comments` : 指定したスレッドにコメントを追加
+
+## モデル構造
+
+### カテゴリー (Category)
+
+```javascript
+const mongoose = require('mongoose');
+
+const categorySchema = new mongoose.Schema({
+  name: { type: String, required: true }
+});
+
+module.exports = mongoose.model('Category', categorySchema);
+```
+
+### スレッド (Thread)
+
+```javascript
+const mongoose = require('mongoose');
+
+const threadSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
+  createdAt: { type: Date, default: Date.now },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
+});
+
+module.exports = mongoose.model('Thread', threadSchema);
+```
+
+### コメント (Comment)
+
+```javascript
+const mongoose = require('mongoose');
+
+const commentSchema = new mongoose.Schema({
+  thread: { type: mongoose.Schema.Types.ObjectId, ref: 'Thread', required: true },
+  content: { type: String, required: true },
+  name: { type: String, default: '匿名' },
+  createdAt: { type: Date, default: Date.now }
+});
+
+module.exports = mongoose.model('Comment', commentSchema);
+```
+
+## コントリビュート
+
+1. リポジトリをフォークします。
+2. 新しいブランチを作成します。
+3. コードを編集します。
+4. 変更をコミットします。
+5. プルリクエストを作成します。
+
+## ライセンス
+
+このプロジェクトはMITライセンスの下でライセンスされています。詳細については、LICENSEファイルを参照してください。
+```
+
+これで、アプリの構成とフォルダ構成、使用している技術に関する詳細な情報を提供するREADMEファイルが完成しました。README.mdファイルにこの内容をコピーして保存してください。

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スレッド詳細</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">スレッド詳細</h1>
+    <button class="btn btn-primary mb-4" onclick="window.location.href='/';">トップ画面に戻る</button>
+    <div id="thread-container"></div>
+    <form id="new-comment-form" class="mt-4">
+      <div class="form-group">
+        <input type="text" id="new-comment-content" class="form-control" placeholder="コメントを追加" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">コメントを追加する</button>
+    </form>
+  </div>
+  <script>
+    const threadId = "<%= threadId %>";
+  </script>
+  <script src="/js/thread.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

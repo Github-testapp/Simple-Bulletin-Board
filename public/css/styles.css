@@ -1,0 +1,29 @@
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: #f8f9fa;
+}
+
+h1, h2 {
+  color: #343a40;
+}
+
+.thread, .comment {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.thread h3, .comment-meta {
+  margin-top: 0;
+}
+
+.comments {
+  margin-top: 10px;
+}
+
+.comment-meta {
+  font-size: 0.9em;
+  color: #6c757d;
+}
